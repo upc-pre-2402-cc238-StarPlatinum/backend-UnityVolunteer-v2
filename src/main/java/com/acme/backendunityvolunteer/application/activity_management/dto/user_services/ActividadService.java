@@ -9,6 +9,7 @@ import com.acme.backendunityvolunteer.domain.user_management.model.PerfilVolunta
 import com.acme.backendunityvolunteer.domain.user_management.model.Usuario;
 import com.acme.backendunityvolunteer.domain.user_management.model.repository.PerfilOrganizacionRepository;
 import com.acme.backendunityvolunteer.domain.user_management.model.repository.PerfilVoluntarioRepository;
+import com.acme.backendunityvolunteer.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,6 +107,31 @@ public class ActividadService {
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public ActividadDTO actualizarActividad(Long actividadId, ActividadDTO actividadDTO) {
+        // Buscar la actividad por su ID
+        Actividad actividadExistente = actividadRepository.findById(actividadId)
+                .orElseThrow(() -> new NotFoundException("Actividad no encontrada con ID: " + actividadId));
+
+        // Actualizar los datos de la actividad
+        actividadExistente.setNombre(actividadDTO.getNombre());
+        actividadExistente.setDescripcion(actividadDTO.getDescripcion());
+        actividadExistente.setFecha(actividadDTO.getFecha());
+        actividadExistente.setHora(actividadDTO.getHora());
+        actividadExistente.setDuracion(actividadDTO.getDuracion());
+        actividadExistente.setLugar(actividadDTO.getLugar());
+        actividadExistente.setTipo(actividadDTO.getTipo());
+        actividadExistente.setPersonasMinimo(actividadDTO.getPersonasMinimo());
+        actividadExistente.setPersonasMaximo(actividadDTO.getPersonasMaximo());
+
+        // Guardar la actividad actualizada
+        actividadRepository.save(actividadExistente);
+
+        // Retornar el DTO actualizado
+        return mapToDTO(actividadExistente);
+    }
+
 
     @Transactional
     public List<VoluntarioInscritoDTO> listarVoluntariosDeActividad(Long actividadId) {

@@ -151,6 +151,32 @@ public class ActividadController {
         }
     }
 
+    @PutMapping("/organizacion/editar/{actividadId}")
+    public ResponseEntity<Map<String, Object>> actualizarActividad(
+            @PathVariable Long actividadId,
+            @Valid @RequestBody ActividadDTO actividadDTO) {
+        try {
+            // Llama a `actualizarActividad` en el servicio para realizar la actualización
+            ActividadDTO actividadActualizada = actividadService.actualizarActividad(actividadId, actividadDTO);
+
+            // Prepara la respuesta
+            Map<String, Object> response = new HashMap<>();
+            response.put("actividad", actividadActualizada);
+            response.put("mensaje", "Actividad actualizada con éxito");
+
+            // Retorna la respuesta con el estado HTTP 200 (OK)
+            return ResponseEntity.ok(response);
+
+        } catch (NotFoundException e) {
+            // Si la actividad no se encuentra, retorna un error 404 (Not Found)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("mensaje", "Actividad no encontrada"));
+        } catch (Exception e) {
+            // En caso de un error inesperado, retorna un error 500 (Internal Server Error)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("mensaje", "Error al actualizar la actividad"));
+        }
+    }
 
 
 
