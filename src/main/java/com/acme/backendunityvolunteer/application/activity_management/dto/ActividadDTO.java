@@ -18,4 +18,5 @@ public class ActividadDTO {
     private int personasMaximo;
     private int totalPersonasInscritas;
     private Long organizacionId;
+    private int puntuacionActividad;
 }

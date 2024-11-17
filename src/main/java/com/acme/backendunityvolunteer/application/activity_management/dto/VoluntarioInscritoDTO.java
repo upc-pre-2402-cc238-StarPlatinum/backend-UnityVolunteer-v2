@@ -14,8 +14,9 @@ public class VoluntarioInscritoDTO {
     private String intereses;
     private String experiencia;
     private String disponibilidad;
+    private int puntuacion;
 
-    public VoluntarioInscritoDTO(Long id, String nombre, String correo, String telefono, String intereses, String experiencia, String disponibilidad) {
+    public VoluntarioInscritoDTO(Long id, String nombre, String correo, String telefono, String intereses, String experiencia, String disponibilidad,int puntuacion) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -23,5 +24,6 @@ public class VoluntarioInscritoDTO {
         this.intereses = intereses;
         this.experiencia = experiencia;
         this.disponibilidad = disponibilidad;
+        this.puntuacion = puntuacion;
     }
 }
