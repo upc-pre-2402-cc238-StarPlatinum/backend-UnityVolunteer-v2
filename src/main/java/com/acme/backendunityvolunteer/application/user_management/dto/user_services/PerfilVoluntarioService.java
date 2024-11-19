@@ -43,10 +43,10 @@ public class PerfilVoluntarioService {
     }
 
     @Transactional
-    public void sumarPuntuacionActividad(Long usuarioId, int puntuacionActividad) {
-        PerfilVoluntario perfil = perfilVoluntarioRepository.findByUsuarioId(usuarioId);
+    public void sumarPuntuacionActividad(PerfilVoluntario perfil, int puntuacionActividad) {
+
         if (perfil == null) {
-            throw new RuntimeException("Perfil de voluntario no encontrado para el usuario con ID: " + usuarioId);
+            throw new RuntimeException("Error al sumar la puntacion de actividad con el perfil brindado");
         }
 
         int nuevaPuntuacion = perfil.getPuntuacion() + puntuacionActividad;

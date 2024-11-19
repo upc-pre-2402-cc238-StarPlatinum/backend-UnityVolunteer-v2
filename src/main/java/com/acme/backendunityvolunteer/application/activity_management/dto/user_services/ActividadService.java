@@ -74,7 +74,7 @@ public class ActividadService {
         // Retrieve the puntuacionActividad from the actividad entity
         int puntuacionActividad = actividad.getPuntuacionActividad();
         // Sumar la puntuación de la actividad al perfil del voluntario
-        perfilVoluntarioService.sumarPuntuacionActividad(voluntarioId, puntuacionActividad);
+        perfilVoluntarioService.sumarPuntuacionActividad(voluntario, puntuacionActividad);
         actividadRepository.save(actividad);
     }
 
