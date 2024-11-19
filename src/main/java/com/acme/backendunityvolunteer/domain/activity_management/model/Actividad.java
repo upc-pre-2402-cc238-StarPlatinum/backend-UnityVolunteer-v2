@@ -61,4 +61,8 @@ public class Actividad {
             inverseJoinColumns = @JoinColumn(name = "voluntario_id")
     )
     private List<PerfilVoluntario> voluntarios;
+
+    @Column(nullable = false)
+    private int puntuacionActividad;
 }
+

@@ -11,4 +11,5 @@ public class PerfilVoluntarioDTO {
     private String intereses;
     private String experiencia;
     private String disponibilidad;
+    private int puntuacion;
 }
