@@ -1,12 +1,10 @@
 package com.acme.backendunityvolunteer.domain.news_management.model;
 
-import com.acme.backendunityvolunteer.domain.activity_management.model.Actividad;
+import com.acme.backendunityvolunteer.domain.user_management.model.PerfilOrganizacion;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -26,9 +24,10 @@ public class Noticia {
 
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date fechaPublicacion;
+    private String fechaPublicacion;
 
-    @ManyToOne
-    @JoinColumn(name = "actividad_id", nullable = false)
-    private Actividad actividad;
+    //Relacion con la organizacion que crea la noticia
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organizacion_id", nullable = false)
+    private PerfilOrganizacion organizacion;
 }
