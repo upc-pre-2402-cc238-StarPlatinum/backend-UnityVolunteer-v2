@@ -30,6 +30,7 @@ public class NoticiaService {
         Noticia noticia = new Noticia();
         noticia.setTitulo(noticiaDTO.getTitulo());
         noticia.setDescripcion(noticiaDTO.getDescripcion());
+        noticia.setImagenPortada(noticiaDTO.getImagenPortada());
         noticia.setFechaPublicacion(noticiaDTO.getFechaPublicacion());
         noticia.setOrganizacion(organizacion);
 
@@ -44,11 +45,29 @@ public class NoticiaService {
                 .collect(Collectors.toList());
     }
 
+    // Metodo para listar todas las noticias publicadas por una organizacion
+    public List<NoticiaDTO> obtenerNoticiasPorOrganizacion(Long organizacionId) {
+        List<Noticia> noticias = noticiaRepository.findByOrganizacionId(organizacionId);
+        return noticias.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    //Metodo para eliminar una noticia
+    @Transactional
+    public void eliminarNoticia(Long noticiaId) {
+        if(!noticiaRepository.existsById(noticiaId)) {
+            throw new RuntimeException("Noticia no encontrada con ID: " + noticiaId);
+        }
+        noticiaRepository.deleteById(noticiaId);
+    }
+
     private NoticiaDTO mapToDTO(Noticia noticia) {
         NoticiaDTO dto = new NoticiaDTO();
         dto.setId(noticia.getId());
         dto.setTitulo(noticia.getTitulo());
         dto.setDescripcion(noticia.getDescripcion());
+        dto.setImagenPortada(noticia.getImagenPortada());
         dto.setFechaPublicacion(noticia.getFechaPublicacion());
         dto.setOrganizacionId(noticia.getOrganizacion().getId());
 
