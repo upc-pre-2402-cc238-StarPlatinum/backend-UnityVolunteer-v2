@@ -37,6 +37,20 @@ public class PerfilVoluntarioService {
         perfil.setIntereses(perfilDTO.getIntereses());
         perfil.setExperiencia(perfilDTO.getExperiencia());
         perfil.setDisponibilidad(perfilDTO.getDisponibilidad());
+        perfil.setPuntuacion(perfilDTO.getPuntuacion());
+
+        perfilVoluntarioRepository.save(perfil);
+    }
+
+    @Transactional
+    public void sumarPuntuacionActividad(PerfilVoluntario perfil, int puntuacionActividad) {
+
+        if (perfil == null) {
+            throw new RuntimeException("Error al sumar la puntacion de actividad con el perfil brindado");
+        }
+
+        int nuevaPuntuacion = perfil.getPuntuacion() + puntuacionActividad;
+        perfil.setPuntuacion(nuevaPuntuacion);
 
         perfilVoluntarioRepository.save(perfil);
     }
@@ -55,6 +69,7 @@ public class PerfilVoluntarioService {
         perfil.setIntereses(perfilDTO.getIntereses());
         perfil.setExperiencia(perfilDTO.getExperiencia());
         perfil.setDisponibilidad(perfilDTO.getDisponibilidad());
+        perfil.setPuntuacion(perfilDTO.getPuntuacion());
 
         perfilVoluntarioRepository.save(perfil);
     }
@@ -68,6 +83,7 @@ public class PerfilVoluntarioService {
         dto.setIntereses(perfil.getIntereses());
         dto.setExperiencia(perfil.getExperiencia());
         dto.setDisponibilidad(perfil.getDisponibilidad());
+        dto.setPuntuacion(perfil.getPuntuacion());
         return dto;
     }
 }

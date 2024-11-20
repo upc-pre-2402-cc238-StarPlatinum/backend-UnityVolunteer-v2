@@ -43,8 +43,7 @@ public class ActividadController {
 
     // Inscribir un voluntario en una actividad
     @PostMapping("/voluntario/participar/{actividadId}")
-    public ResponseEntity<Map<String, String>> inscribirVoluntario(
-            @PathVariable Long actividadId, @RequestParam Long voluntarioId) {
+    public ResponseEntity<Map<String, String>> inscribirVoluntario(@PathVariable Long actividadId, @RequestParam Long voluntarioId) {
         try {
             actividadService.inscribirVoluntario(actividadId, voluntarioId);
 

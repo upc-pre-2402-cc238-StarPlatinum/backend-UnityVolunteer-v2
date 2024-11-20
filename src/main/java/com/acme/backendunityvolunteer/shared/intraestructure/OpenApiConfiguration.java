@@ -13,7 +13,7 @@ public class OpenApiConfiguration {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        OpenAPI openAPI = new OpenAPI()
+        return new OpenAPI()
                 .info(new Info()
                         .title("VolunteerLink API")
                         .description("API for managing VolunteerLink platform functionalities")
@@ -22,22 +22,6 @@ public class OpenApiConfiguration {
                 .externalDocs(new ExternalDocumentation()
                         .description("VolunteerLink Wiki Documentation")
                         .url("https://volunteerlink.wiki.github.org/docs"));
-
-        // Definir el servidor con `https` para producción
-        Server server = new Server();
-        if (isProductionEnvironment()) {
-            server.setUrl("https://backend-movil-production.up.railway.app"); // Cambia esta URL a tu dominio de producción
-        } else {
-            server.setUrl("http://localhost:8080"); // Para desarrollo local
-        }
-
-        openAPI.addServersItem(server);
-        return openAPI;
     }
 
-    private boolean isProductionEnvironment() {
-        String railwayEnv = System.getenv("RAILWAY_ENVIRONMENT");
-        // Si la variable RAILWAY_ENVIRONMENT existe, asumimos que estamos en producción
-        return railwayEnv != null && !railwayEnv.isEmpty();
-    }
 }

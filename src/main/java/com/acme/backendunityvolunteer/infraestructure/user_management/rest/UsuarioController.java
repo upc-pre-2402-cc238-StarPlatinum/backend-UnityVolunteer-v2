@@ -173,6 +173,7 @@ public class UsuarioController {
             response.put("intereses", perfilVoluntarioDTO.getIntereses());
             response.put("experiencia", perfilVoluntarioDTO.getExperiencia());
             response.put("disponibilidad", perfilVoluntarioDTO.getDisponibilidad());
+            response.put("puntuacion", perfilVoluntarioDTO.getPuntuacion());
 
             return ResponseEntity.ok(response);
         } catch (NotFoundException e) {

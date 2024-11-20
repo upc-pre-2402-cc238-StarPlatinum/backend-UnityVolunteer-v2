@@ -10,21 +10,9 @@ import java.net.URI;
 public class BackendUnityVolunteerApplication {
 
     public static void main(String[] args) {
-        // Imprimir las variables de entorno para asegurarse de que están bien configuradas
-        System.out.println("DB_HOST: " + System.getenv("DB_HOST"));
-        System.out.println("DB_PORT: " + System.getenv("DB_PORT"));
-        System.out.println("DB_NAME: " + System.getenv("DB_NAME"));
-        System.out.println("DB_USER: " + System.getenv("DB_USER"));
-
-        // Iniciar la aplicación Spring Boot
         SpringApplication.run(BackendUnityVolunteerApplication.class, args);
 
-        // Abrir Swagger solo si se está ejecutando localmente
-        if (isLocalEnvironment()) {
-            openSwaggerUI();
-        } else {
-            System.out.println("Entorno de producción detectado. No se abrirá automáticamente Swagger UI.");
-        }
+        openSwaggerUI();
     }
 
     private static void openSwaggerUI() {
@@ -38,12 +26,5 @@ public class BackendUnityVolunteerApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // Método para detectar si estamos en un entorno local o de producción
-    private static boolean isLocalEnvironment() {
-        String railwayEnv = System.getenv("RAILWAY_ENVIRONMENT");
-        // Si no se encuentra la variable de entorno, asumimos que es local
-        return railwayEnv == null || railwayEnv.isEmpty();
     }
 }
