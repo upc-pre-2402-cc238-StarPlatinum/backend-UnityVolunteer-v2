@@ -46,4 +46,34 @@ public class NoticiaController {
         List<NoticiaDTO> noticias = noticiaService.listarNoticias();
         return ResponseEntity.ok(noticias);
     }
+
+    //Obtener todas las noticias publicadas por una organizacion
+    @GetMapping("/organizacion/{organizacionId}")
+    public ResponseEntity<List<NoticiaDTO>> obtenerNoticiasPorOrganizacion(@PathVariable Long organizacionId) {
+        try {
+            List<NoticiaDTO> noticias = noticiaService.obtenerNoticiasPorOrganizacion(organizacionId);
+            return ResponseEntity.ok(noticias);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    //Eliminar una noticia
+    @DeleteMapping("/organizacion/eliminar/{noticiaId}")
+    public ResponseEntity<Map<String, String>> eliminarNoticia(@PathVariable Long noticiaId) {
+        try {
+            noticiaService.eliminarNoticia(noticiaId);
+            return ResponseEntity.ok(Map.of("mensaje", "Noticia eliminada con éxito"));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("mensaje", "Noticia no encontrada"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("mensaje", "Error al eliminar la noticia"));
+        }
+    }
 }
