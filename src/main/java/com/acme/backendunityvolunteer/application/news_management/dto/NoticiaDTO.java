@@ -11,6 +11,7 @@ public class NoticiaDTO {
     private Long id;
     private String titulo;
     private String descripcion;
+    private String imagenPortada;
     private String fechaPublicacion;
     private Long organizacionId;
 }
