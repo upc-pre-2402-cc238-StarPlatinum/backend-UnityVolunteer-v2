@@ -22,7 +22,7 @@ public class Noticia {
     @Column(nullable = false)
     private String descripcion;
 
-    @Column(length = 2048)
+    @Column(nullable = false, length = 2048)
     private String imagenPortada;
 
     @Column(nullable = false)
