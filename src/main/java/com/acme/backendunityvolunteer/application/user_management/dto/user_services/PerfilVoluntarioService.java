@@ -49,7 +49,7 @@ public class PerfilVoluntarioService {
             throw new RuntimeException("Error al sumar la puntacion de actividad con el perfil brindado");
         }
 
-        int nuevaPuntuacion = perfil.getPuntuacion() + puntuacionActividad;
+        int nuevaPuntuacion = perfil.getPuntuacion() + puntuacionActividad + 1;
         perfil.setPuntuacion(nuevaPuntuacion);
 
         perfilVoluntarioRepository.save(perfil);
